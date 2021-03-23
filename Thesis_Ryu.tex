@@ -1,0 +1,304 @@
+%%
+%% TeX:UTF-8
+%%
+%% POSTECH 학위논문양식 LaTeX용 (ver 0.4) 예시
+%%
+%% @version 0.6
+%% @author  박준신 Junshin Park (mailto:lonelywing@postech.ac.kr)
+%% @date    2021. 3. 24.
+%%
+%% @requirement
+%% teTeX, fpTeX, teTeX 등의 LaTeX2e 배포판
+%% + 은광희 님의 HLaTeX 0.991 이상 버젼 또는 홍석호 님의 HPACK 1.0
+%% : 설치에 대한 자세한 정보는 http://www.ktug.or.kr을 참조바랍니다.
+%% 
+%% @Tested in
+%% Windows 7, Texlive 2014.
+%% Ubuntu 14.04 LTS, Texlive 2016.
+%% Compatibility with miktex has not been tested yet.
+%%
+%% @note for international students
+%% Present format is intended for both Korean and international students.
+%% For those control statements or arguments that need guidance, 
+%% comments are added in both languages for convenience. You may however delete the Korean comments 
+%% if your specific environment does not support Korean.
+%% For more information or help, please contact the author of which email address is written above.
+%%
+%%
+%% @acknowledgement
+%% 본 latex template은 kaist 채승병님의 template을 바탕으로 만들어졌음을 밝힙니다.
+%% Alpha test 및 본 thesis 예시 내용은 컴퓨터공학과 졸업생이신 오수영 학우의 도움으로 작성되었습니다.
+%% 또한, Sae Hee Ryu의 지원이 한 스푼 들어갔습니다.
+%% -------------------------------------------------------------------
+%% @information
+%% 이 예제 파일은 hangul-ucs를 사용합니다. UTF-8 입력 인코딩으로
+%% 작성되었습니다. hlatex의 hfont는 이용하지 않습니다. --2006/02/11
+
+
+
+% @class postech-ucs.cls
+% @options [default: doctor, korean, final]
+% - doctor: 박사과정 | master : 석사과정
+% - korean: 한글논문 | english: 영문논문
+% - final : 최종판   | draft  : 시험판
+% - pdfdoc : 선택하지 않으면 북마크와 colorlink를 만들지 않습니다.(Generate bookmark and colorlink if enabled)
+\documentclass[doctor,english,final]{postech-ucs}
+%\documentclass[master,english,final]{postech-ucs}
+% If you want make pdf document (include bookmark, colorlink)
+%\documentclass[doctor,english,final,pdfdoc]{postech-ucs}
+
+% postech-ucs.cls 에서는 기본으로 dhucs, ifpdf, graphicx, afterpage, refcount 패키지가 로드됩니다.
+% (postech-ucs.cls by default loads dhucs, ifpdf,refcount and graphicx packages. Please load any additional packages if needed)
+% 추가로 필요한 패키지가 있다면 주석을 풀고 적어넣으십시오,
+%\usepackage{...}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{comment}
+\usepackage{physics}
+\usepackage{anyfontsize}
+% \usepackage{bbm}
+% \renewcommand{\thealgorithm}{}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+
+% @command title 논문 제목(title of thesis)
+% @options [default: (none)]
+% - korean: 한글제목(korean title) | english: 영문제목(english title)
+\title[korean] {각분해광전자분광법을 이용한 표면 도핑된 흑린의 전자구조에 관한 연구}
+\title[english]{Band structure of doped black phosphorus studied by angle-resolved photoemission spectroscopy}
+
+% @note 표지에 출력되는 제목을 강제로 줄바꿈하려면 \linebreak 을 삽입.
+%       \\ 나 \newline 등을 사용하면 안됩니다. (아래는 예시)
+%
+% If you want to begin a new line in cover, use \linebreak .
+% See examples above.
+%
+
+
+% @command author 저자 이름
+% @param   family_name, given_name 성, 이름을 구분해서 입력
+% @options [default: (none)]
+% - korean: 한글이름 | chinese: 한문이름 | english: 영문이름
+% ex) \author[english]{family name in english}{given name in english}
+%
+% If you are a foreigner (this means you have no korean name),
+% You must fill the korean name as blank, instead of deleting it or commenting it out.
+% \author[korean] {}{}
+% \author[english]{Donald}{Trump}
+%
+%
+\author[korean] {류}{세 희}
+\author[english]{Ryu}{Sae Hee}
+
+% @command advisor 지도교수 이름 (복수가능)
+% @usage   \advisor[options]{...한글이름...}{...영문이름...}{signed|nosign}
+% @options [default: major]
+% - major: 주 지도교수  | coopr: 공동 지도교수
+\advisor[major]{박 재 훈}{Jae-Hoon Park}{nosign}
+\advisor[coopr]{김 근 수}{Keun Su Kim}{nosign}
+%
+% 지도교수 한글이름은 입력하지 않아도 됩니다.
+% You may not input advisor's korean name
+% like this \advisor[major]{}{Chang, Kee Joo}{signed}
+%
+
+% @command department {학과이름}{학위종류} - 아래 표에 따라 코드를 입력
+% @command department {department code}{degree field}
+%
+% department code table
+%
+% MA	// 수학 	Department of Mathematics
+% PH	// 물리학 Department of Physics 
+% CH 	// 화학 	Department of Chemistry
+% LS  	// 생명과학 Department of Life Sciences
+% MS 	// 신소재공학 Department of Materials Science and Engineering
+% ME 	// 기계공학 Department of Mechanical Engineering
+% EE 	// 전자전기공학 Department of Electrical Engineering
+% IME 	// 산업경영공학 Department of Industrial & Management Engineering
+% CSE 	// 컴퓨터공학 Department of Computer Science and Engineering
+% CE 	// 화학공학	Department of Chemical Engineering
+% CITE 	// 창의IT	Department of Creative IT Excellence Engineering
+% AMS	// 첨단재료과학 Division of Advanced Material Science
+% IBB 	// 시스템생명공학 Division of Integrative Bioscience and Biotechnology 
+% ITCE 	// 정보전자융합 Division of IT Convergence Engineering
+% ANE 	// 첨단원자력공학 Division of Advanced Nuclear Engineering
+% EV 	// 환경공학	School of Environmental Science and Engineering
+% IBT	// 융합생명공학과 School of Interdisciplinary Bioscience and Bioengineering
+% TIM 	// 기술경영공학	Graduate Program for Technology & Innovation Management
+% WE 	// 풍력특성화 School of Wind Energy
+% GEM 	// 엔지니어링특성화 Graduate School of Engineering Mastership
+% GIFT 	// 철강대학원 Graduate Institute of Ferrous Technology
+% OSTI 	// 해양대학원 POSTECH Ocean Science & Technology Institute
+
+%
+% science: 이학 | engineering: 공학 | business : 경영학
+% 박사논문의 경우는 학위종류를 입력하지 않아도 됩니다.
+% If you write Ph.D. dissertation, you cannot input degree field.
+
+\department{PH}{}
+
+% @command studentid 학번(ID)
+\studentid{20131187}
+
+% @command referee 심사위원 (석사과정 3인, 박사과정 5인)
+\referee[1]{Jae-Hoon Park}
+\referee[2]{Myung Ho Kang}
+\referee[3]{Jeehoon Kim}
+\referee[4]{Tae-Hwan Kim}
+\referee[5]{Keun Su Kim}
+% Of course english name is available
+
+% @command approvaldate 지도교수논문승인일
+% @param   year,month,day 연,월,일 순으로 입력
+\approvaldate{2020}{06}{25}
+
+% @command refereedate 심사위원논문심사일
+% @param   year,month,day 연,월,일 순으로 입력
+\refereedate{2020}{06}{25}
+
+% @command gradyear 졸업년도
+\gradyear{2020}
+
+% 본문 시작
+\begin{document}
+
+    % 앞표지, 속표지, 학위논문 제출승인서, 학위논문 심사완료 검인서는
+    % 클래스 옵션을 final로 지정해주면 자동으로 생성되며,
+    % 반대로 옵션을 draft로 지정해주면 생성되지 않습니다.
+
+    % 영문초록 (abstract)
+    \begin{abstract}
+
+    \end{abstract}
+
+    % 목차 (Table of Contents) 생성
+    \tableofcontents
+
+    % 표목차 (List of Tables) 생성
+%    \listoftables
+
+    % 그림목차 (List of Figures) 생성
+    \listoffigures
+
+    % 위의 세 종류의 목차는 한꺼번에 다음 명령으로 생성할 수도 있습니다.
+    %\makecontents
+
+%% 이하의 본문은 LaTeX 표준 클래스 report 양식에 준하여 작성하시면 됩니다.
+%% 하지만 part는 사용하지 못하도록 제거하였으므로, chapter가 문서 내의
+%% 최상위 분류 단위가 됩니다.
+%% You cannot use 'part'
+
+1 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+2 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+3 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+4 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+5 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+6 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+7 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+8 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+9 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+000 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+1 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+2 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+3 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+4 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+5 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+6 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+7 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+8 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+9 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+000 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+1 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+2 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+3 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+4 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+5 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+6 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+7 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+8 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+9 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+000 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+1 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+2 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+3 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+4 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+5 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+6 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+7 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+8 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+9 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+000 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz \\
+Cite example\cite{Moin1998}
+
+%%
+%% 한글요약문 시작 (Korean summary)
+%%
+%% Note. 영문논문일 경우에만 필요하니 한글논문의 경우에는 작성하지 마십시오.
+%%
+\begin{summarykorean}
+
+\end{summarykorean}
+
+%%
+%% 참고문헌 시작
+%% Refences
+%%
+
+\bibliographystyle{unsrt}
+\bibliography{mybib_ryu}
+
+%%
+%% 감사의 글 시작
+%% Acknowledgement
+%%
+% @command acknowledgement 감사의글
+% @options [default: 클래스 옵션 korean|english ]
+% - korean : 한글타이틀 | english : 영문타이틀
+
+\acknowledgement[korean]
+
+
+    %%때로는 엄하고 때로는 부드러운 모습으로 지도 해주신 한준희 교수님, 감사드립니다.
+%%
+%% 이력서 시작
+%% Curriculum Vitae
+%%
+% @command curriculumvitae 이력서
+% @options [default: 클래스 옵션 korean|english ]
+% - korean : 한글이력서 | english : 영문이력서
+\curriculumvitae[korean]
+
+    % @environment personaldata 개인정보
+    % @command     name         이름
+        % input data only you want
+    \begin{personaldata}
+        \name       {Sae Hee Ryu}
+    \end{personaldata}
+
+    % @environment education 학력
+    % @options [default: (none)] - 수학기간을 입력
+    \begin{education}
+%	\item[2013. 9.\ --\ 2020. 8.] Department of Physics, POSTECH (Ph.D.)
+%	\item[2009. 3.\ --\ 2013. 8.] Department of Physics, POSTECH (B.S.)
+	\item[2013. 9.\ --\ 2020. 8.] Department of Physics, Pohang University of Science and Technology (Ph.D.)
+	\item[2009. 3.\ --\ 2013. 8.] Department of Physics, Pohang University of Science and Technology (B.S.)
+    \end{education}
+
+    % @environment experience 경력
+    % @options [default: (none)] - 해당기간을 입력
+   \begin{experience}
+	\item[2016. 8.\ --\ 2019. 9.] Technical Research Personnel, Alternative military service
+	\item[2014. 3.\ --\ 2015. 9.] Developing endstation for spin-ARPES beamline in PAL beamline 4A2 (Institute for Basic Science)
+   \end{experience}
+
+    % @environment activity 학회활동
+    % @options [default: (none)] - 활동내용을 입력
+%    \begin{affiliation}
+
+%    \end{affiliation}
+
+    \afterpage{\blankpage}  % 마지막장 백색별지
+
+%% 본문 끝
+\end{document}
