@@ -210,18 +210,19 @@
 
 % @command department
 %
-\newcommand{\@degreeCode}{}          % 학위 영문코드
-\newcommand{\@degreeName}{}          % 학위명
+\newcommand{\@degreeCode}{}             % 학위 영문코드
+\newcommand{\@degreeName}{}             % 학위명
 \newcommand{\@parentDeptNameKor}{}      % 학과/전공 첫째줄
 \newcommand{\@childDeptNameKor}{}       % 학과/전공 둘째줄
 \newcommand{\@parentDeptNameEng}{}      % 학과/전공 첫째줄
 \newcommand{\@childDeptNameEng}{}       % 학과/전공 둘째줄
-\newcommand{\@programDeptNameEng}{}		%학위명
-\newcommand{\@affFullNameKor}{}      % 학과/전공 한글이름
-\newcommand{\@affFullNameEng}{}      % 학과/전공 영문이름
-\newcommand{\@affFullNameEngCover}{} % 학과/전공 영문이름(표지용)
+\newcommand{\@programDeptNameEng}{}     % 학위명
+\newcommand{\@affFullNameKor}{}         % 학과/전공 한글이름
+\newcommand{\@affFullNameEng}{}         % 학과/전공 영문이름
+\newcommand{\@affFullNameEngCover}{}    % 학과/전공 영문이름(표지용)
 \newcommand{\@degreeField}{}
 \newcommand{\@degreePrefix}{\ifthenelse{\boolean{@isDoctor}}{D}{M}}
+% https://postech.ac.kr/admission-education/graduate/ 정보 및 순서를 따름
 \newcommand{\department}[2] {%
     \ifthenelse{\equal{#1}{MA}}
 	    {\renewcommand{\@degreeCode}{\@degreePrefix #1}
@@ -259,17 +260,17 @@
          \renewcommand{\@childDeptNameEng}{Department of Mechanical Engineering}
          \renewcommand{\@programDeptNameEng}{Mechanical Engineering}
          \renewcommand{\@degreeField}{#2}} {}
-    \ifthenelse{\equal{#1}{EE}}
-        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{전자전기공학과}
-         \renewcommand{\@childDeptNameEng}{Department of Electrical Engineering}
-         \renewcommand{\@programDeptNameEng}{Electrical Engineering}
-         \renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{IME}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
          \renewcommand{\@childDeptNameKor}{산업경영공학과}
          \renewcommand{\@childDeptNameEng}{Department of Industrial and Management Engineering}
          \renewcommand{\@programDeptNameEng}{Industrial and Management Engineering}
+         \renewcommand{\@degreeField}{#2}} {}
+    \ifthenelse{\equal{#1}{EE}}
+        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
+         \renewcommand{\@childDeptNameKor}{전자전기공학과}
+         \renewcommand{\@childDeptNameEng}{Department of Electrical Engineering}
+         \renewcommand{\@programDeptNameEng}{Electrical Engineering}
          \renewcommand{\@degreeField}{#2}} {}
      \ifthenelse{\equal{#1}{CSE}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
@@ -289,6 +290,24 @@
          \renewcommand{\@childDeptNameEng}{Department of Creative IT Excellence Engineering}
          \renewcommand{\@programDeptNameEng}{Creative IT Excellence Engineering}
          \renewcommand{\@degreeField}{#2}} {}
+     \ifthenelse{\equal{#1}{EV}}
+        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
+         \renewcommand{\@childDeptNameKor}{환경공학과}
+         \renewcommand{\@childDeptNameEng}{School of Environmental Science and Engineering}
+         \renewcommand{\@programDeptNameEng}{Environmental Science and Engineering}
+         \renewcommand{\@degreeField}{#2}} {}
+     \ifthenelse{\equal{#1}{GSAI}}
+        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
+         \renewcommand{\@childDeptNameKor}{인공지능대학원}
+         \renewcommand{\@childDeptNameEng}{Graduate School of Artificial Intelligence}
+         \renewcommand{\@programDeptNameEng}{Artificial Intelligence}
+         \renewcommand{\@degreeField}{#2}} {}
+     \ifthenelse{\equal{#1}{ITCE}}
+        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
+         \renewcommand{\@childDeptNameKor}{정보전자융합공학과}
+         \renewcommand{\@childDeptNameEng}{Division of IT Convergence Engineering}
+         \renewcommand{\@programDeptNameEng}{IT Convergence Engineering}
+         \renewcommand{\@degreeField}{#2}} {}
      \ifthenelse{\equal{#1}{AMS}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
          \renewcommand{\@childDeptNameKor}{첨단재료과학부}
@@ -301,29 +320,17 @@
     	\renewcommand{\@childDeptNameEng}{Division of Integrative Bioscience and Engineering}
         \renewcommand{\@programDeptNameEng}{Integrative Bioscience and Engineering}
     	\renewcommand{\@degreeField}{#2}} {}
-     \ifthenelse{\equal{#1}{IBT}}
-        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{융합생명공학과}
-         \renewcommand{\@childDeptNameEng}{School of Interdisciplinary Bioscience and Bioengineering}
-         \renewcommand{\@programDeptNameEng}{Interdisciplinary Bioscience and Bioengineering}
-         \renewcommand{\@degreeField}{#2}} {}
-     \ifthenelse{\equal{#1}{ITCE}}
-        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{정보전자융합공학과}
-         \renewcommand{\@childDeptNameEng}{Division of IT Convergence Engineering}
-         \renewcommand{\@programDeptNameEng}{IT Convergence Engineering}
-         \renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{ANE}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
          \renewcommand{\@childDeptNameKor}{첨단원자력공학과}
          \renewcommand{\@childDeptNameEng}{Division of Advanced Nuclear Science}
          \renewcommand{\@programDeptNameEng}{Advanced Nuclear Science}
          \renewcommand{\@degreeField}{#2}} {}
-     \ifthenelse{\equal{#1}{EV}}
+     \ifthenelse{\equal{#1}{IBT}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{환경공학과}
-         \renewcommand{\@childDeptNameEng}{School of Environmental Science and Engineering}
-         \renewcommand{\@programDeptNameEng}{Environmental Science and Engineering}
+         \renewcommand{\@childDeptNameKor}{융합생명공학과}
+         \renewcommand{\@childDeptNameEng}{School of Interdisciplinary Bioscience and Bioengineering}
+         \renewcommand{\@programDeptNameEng}{Interdisciplinary Bioscience and Bioengineering}
          \renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{TIM}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
@@ -331,31 +338,12 @@
          \renewcommand{\@childDeptNameEng}{Graduate Program for Technology and Innovation Managment}
          \renewcommand{\@programDeptNameEng}{Technology and Innovation Managment}
          \renewcommand{\@degreeField}{#2}} {}
-    \ifthenelse{\equal{#1}{WE}}
-        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{풍력특성화과정}
-         \renewcommand{\@childDeptNameEng}{Graduate School of Wind Energy}
-         \renewcommand{\@programDeptNameEng}{Wind Energy}
-         \renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{GIFT}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
          \renewcommand{\@childDeptNameKor}{철강대학원}
          \renewcommand{\@childDeptNameEng}{Graduate Institute of Ferrous Technology}
          \renewcommand{\@programDeptNameEng}{Ferrous Technology}
          \renewcommand{\@degreeField}{#2}} {}
-    \ifthenelse{\equal{#1}{GEM}}
-        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{엔지니어링특성화대학원}
-         \renewcommand{\@childDeptNameEng}{Graduate School of Engineering Mastership}
-         \renewcommand{\@programDeptNameEng}{Engineering Mastership}
-         \renewcommand{\@degreeField}{#2}} {}
-    \ifthenelse{\equal{#1}{OSTI}}
-        {\renewcommand{\@degreeCode}{\@degreePrefix #1}
-         \renewcommand{\@childDeptNameKor}{해양대학원}
-         \renewcommand{\@childDeptNameEng}{Ocean Science and Technology Institute}
-         \renewcommand{\@programDeptNameEng}{Ocean Science and Technology}
-         \renewcommand{\@degreeField}{#2}} {}
-
 
     \renewcommand{\@affFullNameKor}{%               % 학과/전공 한글이름
     	\ifthenelse{\equal{\@parentDeptNameKor}{}}
@@ -367,7 +355,6 @@
     		{\@childDeptNameEng}
     		{\@parentDeptNameEng, \@childDeptNameEng}
     }
-
     \renewcommand{\@affFullNameEngCover}{%          % 학과/전공 영문이름
         	\ifthenelse{\equal{\@parentDeptNameEng}{}}
     		{\@childDeptNameEng}
