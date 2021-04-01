@@ -1,4 +1,4 @@
-%% TeX: UTF-8 
+%% TeX: UTF-8
 %%
 %% POSTECH Thesis Template for LaTeX
 %%
@@ -246,19 +246,19 @@
          \renewcommand{\@childDeptNameKor}{생명과학과}
          \renewcommand{\@childDeptNameEng}{Department of Life Sciences}
          \renewcommand{\@programDeptNameEng}{Life Science}
-         \renewcommand{\@degreeField}{#2}} {}    	 	
+         \renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{MS}}
 	    {\renewcommand{\@degreeCode}{\@degreePrefix #1}
     	\renewcommand{\@childDeptNameKor}{신소재공학과}
     	\renewcommand{\@childDeptNameEng}{Department of Material Science and Engineering}
         \renewcommand{\@programDeptNameEng}{Material Science and Engineering}
-    	\renewcommand{\@degreeField}{#2}} {}      	
+    	\renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{ME}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
          \renewcommand{\@childDeptNameKor}{기계공학과}
          \renewcommand{\@childDeptNameEng}{Department of Mechanical Engineering}
          \renewcommand{\@programDeptNameEng}{Mechanical Engineering}
-         \renewcommand{\@degreeField}{#2}} {}      	
+         \renewcommand{\@degreeField}{#2}} {}
     \ifthenelse{\equal{#1}{EE}}
         {\renewcommand{\@degreeCode}{\@degreePrefix #1}
          \renewcommand{\@childDeptNameKor}{전자전기공학과}
@@ -472,7 +472,7 @@
         \end{flushleft}
     \end{minipage}
 %    \afterpage{\null\thispagestyle{empty}\newpage}           % ver0.2 : 첫 장 백색별지 추가 (지침사항은 아님)
-    \newpage   
+    \newpage
 }
 
 %%
@@ -535,7 +535,7 @@
     \end{minipage}
 
       % 학위논문 심사완료 검인서
-    \newpage 
+    \newpage
     \thispagestyle{empty} \noindent
     \begin{minipage}[t][][t]{\textwidth}
         \begin{center}
@@ -615,10 +615,10 @@
     \fontsize{11pt}{19pt}\selectfont
 }
 {
-%	  \label{pg:abstractLastPage}  
+%	  \label{pg:abstractLastPage}
 	  \newpage
   	  \setcounter{pagemarker}{\value{page}}
-	  
+
      %\pagenumbering{Roman}
 %\pagenumbering{arabic}              % 페이지 아라비아 숫자 포맷
 \let\linebreak\@tempbreak                    % \linebreak 명령 복원
@@ -769,7 +769,7 @@
     }{\end{list}}
 
     \newenvironment{education}{%               % 학력
-        \thispagestyle{empty}   
+        \thispagestyle{empty}
         \vspace*{10mm} \noindent
 %        \ifx\@ccvlang\@korean
 %            \begin{center}
@@ -807,7 +807,7 @@
     \newcounter{itemnum1}
     \newenvironment{affiliation}{%                % 학회활동
         \thispagestyle{empty}               	% ver0.2 : 쪽 번호없음
-        \vspace*{10mm} \noindent		% ver0.2 : 줄 간격 조정            
+        \vspace*{10mm} \noindent		% ver0.2 : 줄 간격 조정
 %        \ifx\@ccvlang\@korean
 %            \begin{center}
 %                \makebox[2cm][s]{\textbf{\large 학 회 활 동}}
@@ -876,8 +876,8 @@
 %\renewcommand{\thechapter}{\Roman{part}} %Enumerate chapter as Roman number
 %\renewcommand{\thechapter}{\arabic{chapter}} %Enumerate chapter as Roman number
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}} %Enumerate section as arabic number
-\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}} 	% ver0.2 : figure 번호를 아라비아 숫자로 표기
-\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}	% ver0.2 : table 번호를 아라비아 숫자로 표기	
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}} % ver0.2 : figure 번호를 아라비아 숫자로 표기
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}   % ver0.2 : table 번호를 아라비아 숫자로 표기
 \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
 
 \renewcommand\chapter{%
@@ -902,7 +902,7 @@
     \chaptermark{#1}%
     \addtocontents{lof}{\protect\addvspace{10\p@}}%
     \addtocontents{lot}{\protect\addvspace{10\p@}}%
-    
+
     \if@twocolumn
         \@topnewpage[\@makechapterhead{#2}]%
     \else
@@ -1021,7 +1021,7 @@
     \thispagestyle{postech}           % ver0.2 : 목차 쪽번호 유지
     \ifnum \c@tocdepth >\m@ne
         \addpenalty{-\@highpenalty}%
-        \vskip 1.3em \@plus\p@      % ver0.2 : 줄간격 조정 
+        \vskip 1.3em \@plus\p@      % ver0.2 : 줄간격 조정
         \if@isKorean                     % <-- 변경 부분
             \setlength\@tempdima{5.0em} % korean  옵션일 때는 5.0em
         \else

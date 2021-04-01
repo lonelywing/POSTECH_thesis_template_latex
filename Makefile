@@ -1,4 +1,4 @@
-# type "make" command in Unix to create asme2ej.pdf file 
+# type "make" command in Unix to create asme2ej.pdf file
 all:
 	latex Thesis_Ryu
 	bibtex Thesis_Ryu
