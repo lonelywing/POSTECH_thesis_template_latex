@@ -1,0 +1,13 @@
+*.bbl
+*.aux
+*.blg
+*.dvi
+*.lof
+*.log
+*.ps
+*.toc
+*.synctex.gz
+
+# for macOS
+.DS_Store
+__MACOSX/
