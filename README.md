@@ -32,6 +32,7 @@ Windows 7, 8, 10, ubuntu 14.10 이상에서 테스트 완료되었습니다.
 
 
 =============================================================
+
 Dear colleagues,
 
 This is repository of latex version POSTECH thesis template.
