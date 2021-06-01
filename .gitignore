@@ -1,13 +1,32 @@
-*.bbl
+## Core latex/pdflatex auxiliary files:
 *.aux
-*.blg
-*.dvi
 *.lof
 *.log
-*.ps
+*.lot
+*.fls
+*.out
 *.toc
-*.synctex.gz
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
 
-# for macOS
-.DS_Store
-__MACOSX/
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+*.dvi
+*.ps
