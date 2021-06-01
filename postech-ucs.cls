@@ -410,16 +410,16 @@
 %% 필요한 정보 중에 누락된 것이 없는지 점검 --> 제작중. 아직 불완전.
 %%
 \newcommand{\checkparameters}{%
-    \@ifundefined{@titleKor}{%
-        \ClassError{postech}{The korean title is not found}{}}{}
+    % \@ifundefined{@titleKor}{%
+    %     \ClassError{postech}{The korean title is not found}{}}{}
     \@ifundefined{@titleEng}{%
         \ClassError{postech}{The english title is not found}{}}{}
-    \@ifundefined{@authorKor}{%
-        \ClassError{postech}{The korean name of the author is not found}{}}{}
+    % \@ifundefined{@authorKor}{%
+    %     \ClassError{postech}{The korean name of the author is not found}{}}{}
     \@ifundefined{@authorEng}{%
         \ClassError{postech}{The english name of the author is not found}{}}{}
-    \@ifundefined{@advisorMajorKor}{%
-        \ClassError{postech}{The korean name of the major advisor is not found}{}}{}
+    % \@ifundefined{@advisorMajorKor}{%
+    %     \ClassError{postech}{The korean name of the major advisor is not found}{}}{}
     \@ifundefined{@advisorMajorEng}{%
         \ClassError{postech}{The english name of the major advisor is not found}{}}{}
 }
@@ -446,9 +446,8 @@
 \thispagestyle{empty} \noindent%
     \begin{minipage}[b][][b]{\textwidth}
         \begin{center}
-            \@ifundefined{@authorKor}{
-                \fontsize{16pt}{9mm}\selectfont \@authorEng\\}
-                {\fontsize{16pt}{9mm}\selectfont \@authorEng\ (\@authorKor)\\}
+            \fontsize{16pt}{9mm}\selectfont \@authorEng
+            \@ifundefined{@authorKor}{}{\ (\@authorKor)}\\
             \@affFullNameEngCover \\
             \@postech \\
             \@gradYear
@@ -468,8 +467,9 @@
     \begin{minipage}[t][][t]{\textwidth}
         \vspace{9mm}
         \begin{center}
-            \fontsize{21pt}{21pt}\selectfont  \@titleKor \\
-            \vspace{21pt}       % ver0.2 : 제목 줄간격
+            \fontsize{21pt}{21pt}\selectfont
+            \@ifundefined{@titleKor}{}{\@titleKor \\
+            \vspace{21pt}}       % ver0.2 : 제목 줄간격
             \@titleEng
         \end{center}
     \end{minipage}
@@ -576,12 +576,12 @@
     {\begin{minipage}[t]{\@thesisinfowidth}
         %\normalsize \sffamily
         \large
-        \ifthenelse{\equal{\@authorKorFN}{}}
-        {}
+        \@ifundefined{@authorKor}{}
         {\@authorKorFN\ \@authorKorGN.}           % 저자 한글이름
         \@authorEngGN\ \@authorEngFN \\           % 저자 영문이름
         \@titleEng \\
-        \@titleKor \\                 % 학위논문 영문 및 한글제목
+        \@ifundefined{@titleKor}{}
+        {\@titleKor \\}                 % 학위논문 영문 및 한글제목
         \@affFullNameEng, \@gradYear,           % 학과/전공명, 졸업년도
         \@lastPage p\\                            % 총 페이지 수 -> 참고문헌 끝
         \@ifundefined{@advisorCooprEng}         % 공동지도교수 유무판정
