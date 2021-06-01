@@ -348,18 +348,15 @@
     \renewcommand{\@affFullNameKor}{%               % 학과/전공 한글이름
         \ifthenelse{\equal{\@parentDeptNameKor}{}}
             {\@childDeptNameKor}
-            {\@parentDeptNameKor, \@childDeptNameKor}
-    }
+            {\@parentDeptNameKor, \@childDeptNameKor}}
     \renewcommand{\@affFullNameEng}{%               % 학과/전공 영문이름
             \ifthenelse{\equal{\@parentDeptNameEng}{}}
             {\@childDeptNameEng}
-            {\@parentDeptNameEng, \@childDeptNameEng}
-    }
+            {\@parentDeptNameEng, \@childDeptNameEng}}
     \renewcommand{\@affFullNameEngCover}{%          % 학과/전공 영문이름
             \ifthenelse{\equal{\@parentDeptNameEng}{}}
             {\@childDeptNameEng}
-            {\@parentDeptNameEng \\ \@childDeptNameEng}
-    }
+            {\@parentDeptNameEng \\ \@childDeptNameEng}}
     \renewcommand{\@degreeName}{%                       % 학위 영문이름
         \ifthenelse{\boolean{@isDoctor}}
             {Doctor of Philosophy} {%                 % 박사는 모두 Ph.D.
@@ -369,8 +366,7 @@
                 {Master of Science}{}%           % 공학석사는 M.E.
 %            \ifthenelse{\equal{\@degreeField}{business}}
 %                {Master of Business Administration}{}% 경영학석사는 M.B.A.
-        }
-    }
+    }}
 }
 \@onlypreamble{\department}
 
@@ -449,14 +445,14 @@
     \end{minipage}\vfill%\\[30mm]
 \thispagestyle{empty} \noindent%
     \begin{minipage}[b][][b]{\textwidth}
-        \begin{flushleft}
-            \hspace{54.2pt}\@ifundefined{@authorKor}{
+        \begin{center}
+            \@ifundefined{@authorKor}{
                 \fontsize{16pt}{9mm}\selectfont \@authorEng\\}
                 {\fontsize{16pt}{9mm}\selectfont \@authorEng\ (\@authorKor)\\}
-            \hspace{54.2pt}\@affFullNameEngCover \\
-            \hspace{54.2pt}\@postech \\
-            \hspace{54.2pt}\@gradYear
-        \end{flushleft}
+            \@affFullNameEngCover \\
+            \@postech \\
+            \@gradYear
+        \end{center}
     \end{minipage}
 %    \afterpage{\null\thispagestyle{empty}\newpage}           % ver0.2 : 첫 장 백색별지 추가 (지침사항은 아님)
     \newpage
@@ -505,17 +501,18 @@
 \\ \vspace{\baselineskip}
             \Large
             \if@isDoctor
-                A dissertation submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of Doctor of Philosophy in the \@programDeptNameEng
+                A dissertation submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\ in \@programDeptNameEng
             \else
-                A thesis submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName in the \@programDeptNameEng
+                A thesis submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\ in \@programDeptNameEng
             \fi
 \\ \vspace{3\baselineskip}
             \Large
             Pohang, Korea \\
-            \@approvalMonth. \@approvalDay. \@approvalYear  \\ % 제출승인일자
-            Approved by \\
+            \@approvalYear. \@approvalMonth. \@approvalDay \\ % 제출승인일자
+            Approved by \\[1em]
+             \rule{15em}{0.5pt}\\
              % 학위논문 지도교수 영문이름, 단독지도교수일 경우만 가정.
-             \@advisorMajorEng \ (Signature) \\
+             \@advisorMajorEng \\
 %            \@advisorMajorEng \ \textcolor{white}{(Signature)} \\ % ver0.2 : 서명란 글씨 흰색 (인쇄용)
             Academic advisor
         \end{center}
@@ -539,8 +536,8 @@
 
         \begin{flushright}
         \Large
-        \@refereeMonth. \@refereeDay. \@refereeYear \\ \vspace{2\baselineskip}
-    \begin{tabular}{r c r}   % 심사위원명단
+        \@refereeYear. \@refereeMonth. \@refereeDay \\ \vspace{2\baselineskip}
+    \begin{tabular}{r r r}   % 심사위원명단
                 \@ifundefined{@refereeChief}{}
                     {\\[4pt] Committee Chair & \ \makebox[\width]{\@refereeChief}  & \ (Seal)}
                 \@ifundefined{@refereeSecond}{}
@@ -571,29 +568,29 @@
     \renewcommand{\linebreak}{\ }                % \linebreak -> 공백 대체
     \newlength{\@thesisinfowidth}
     \setlength{\@thesisinfowidth}{\textwidth}    % 논문정보박스 사이즈는
-    \addtolength{\@thesisinfowidth}{-30mm}       % 텍스트 폭보다 30mm 작게
+    \addtolength{\@thesisinfowidth}{-25mm}       % 텍스트 폭보다 30mm 작게
     \noindent
 %    \\[10mm]
-    \parbox[t]{30mm}{\large \@degreeCode \\ \@studentID}% 왼쪽박스
+    \parbox[t]{25mm}{\large \@degreeCode \\ \@studentID}% 왼쪽박스
     %\raisebox{3pt}
     {\begin{minipage}[t]{\@thesisinfowidth}
         %\normalsize \sffamily
         \large
         \ifthenelse{\equal{\@authorKorFN}{}}
         {}
-        {\@authorKorFN\ \@authorKorGN}           % 저자 한글이름
+        {\@authorKorFN\ \@authorKorGN.}           % 저자 한글이름
         \@authorEngGN\ \@authorEngFN \\           % 저자 영문이름
-        \@titleEng.  \\
-        \@titleKor.  \\                 % 학위논문 영문 및 한글제목
+        \@titleEng \\
+        \@titleKor \\                 % 학위논문 영문 및 한글제목
         \@affFullNameEng, \@gradYear,           % 학과/전공명, 졸업년도
         \@lastPage p\\                            % 총 페이지 수 -> 참고문헌 끝
         \@ifundefined{@advisorCooprEng}         % 공동지도교수 유무판정
-            {Advisor : ~\@advisorMajorEng.} % 단독지도교수 영문이름
-            {Advisor : ~\@advisorCooprEng.}
+            {Advisor: \@advisorMajorEng.} % 단독지도교수 영문이름
+            {Advisor: \@advisorCooprEng.}
 %%            {Advisors : ~\@advisorMajorEng, % 공동 주 지도교수 영문이름
 %%             Prof.~\@advisorCooprEng.}         % 공동 부 지도교수 영문이름
         \ifthenelse{\boolean{@isKorean}}
-            {}{\\Text in English.}               % 본문이 영어인 경우 명시
+            {}{Text in English.}               % 본문이 영어인 경우 명시
     \end{minipage}}\\[17mm]
     \begin{center} \Large \textbf{ABSTRACT} \end{center}      % 초록명 -> Abstract
     \vspace{8mm}
@@ -645,11 +642,9 @@
     \else
         \chapter*{Summary}
         \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary (in Korean)}}
-        \begin{quote}
-            \begin{center}
-                \noindent \textsf{\Large \@titleEng} \\[6mm]
-            \end{center}
-        \end{quote}% \setlength{\parindent}{0pt}
+        % \begin{center}
+        %     \noindent \Large \@titleEng \\[6mm]
+        % \end{center}% \setlength{\parindent}{0pt}
     \fi
 }{  \let\linebreak\@tempbreak          % \linebreak 명령 되돌리기
 }
@@ -659,19 +654,20 @@
     \setlength{\parindent}{10pt}
     \ifx\@textlang\@english
         \chapter*{요 약 문}
-        \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary (in Korean)}}
         \fontsize{11pt}{19pt} \selectfont
-%        \begin{center}
-%            \noindent\textsf{\Large \@titleKor} \\[6mm]
-%        \end{center}% \setlength{\parindent}{0\p@}
+        \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary (in Korean)}}
+        % \begin{center}
+        %     \noindent{\Large \@titleKor} \\[6mm]
+        % \end{center}% \setlength{\parindent}{0\p@}
     \fi
+}{
+    \let\linebreak\@tempbreak
 }
 
 %%
 %% 감사의 글 및 이력서 생성
 %%
 \newcommand{\acknowledgement}[1][default]{%     % 이력서
-   % \thispagestyle{empty} \noindent             % ver0.2 : 쪽 번호없음
     \setlength{\parindent}{10pt}
     \newcommand{\@acklang}{#1}
     \ifthenelse{\equal{#1}{default}}            % 아무 옵션을 설정하지 않으면
@@ -679,16 +675,17 @@
 %    \ifthenelse{\equal{\@acklang}{\@korean}}
 %        {\chapter*{감 사 의 글}}                 % korean  옵션일 경우
         {\chapter*{Acknowledgements}}         % english 옵션일 경우
+    \thispagestyle{empty}\pagestyle{empty}
 }
 
 \newcommand{\curriculumvitae}[1][default]{%     % 이력서
-    \thispagestyle{empty} \noindent             % ver0.2 : 쪽 번호없음
-%    \newcommand{\@ccvlang}{#1}
-%    \ifthenelse{\equal{#1}{default}}            % 아무 옵션을 설정하지 않으면
-%        {\let\@ccvlang\@textlang}{}           % 논문 언어대로 이력서 언어설정
-%    \ifthenelse{\equal{\@ccvlang}{\@korean}}
-%        {\chapter*{이 력 서}}                 % korean  옵션일 경우
+    \newcommand{\@ccvlang}{#1}
+    \ifthenelse{\equal{#1}{default}}            % 아무 옵션을 설정하지 않으면
+        {\let\@ccvlang\@textlang}{}           % 논문 언어대로 이력서 언어설정
+    \ifthenelse{\equal{\@ccvlang}{\@korean}}
+        {\chapter*{이 력 서}}                 % korean  옵션일 경우
         {\chapter*{Curriculum Vitae}}         % english 옵션일 경우
+    \thispagestyle{empty}\pagestyle{empty}
 }
 
 %%
@@ -697,11 +694,17 @@
     \newenvironment{personaldata}{%            % 개인정보
         \thispagestyle{empty}               % ver0.2 : 쪽 번호없음
         \begin{list}{}{%
-            \setlength{\labelwidth}{70pt}
+            \ifx\@ccvlang\@korean
+                \setlength{\labelwidth}{70pt}
+                \renewcommand{\makelabel}[1]{##1\ \ :\ }
+            \else
+                \setlength{\labelwidth}{110pt}
+                \renewcommand{\makelabel}[1]{##1}
+            \fi
             \setlength{\leftmargin}{\labelwidth}
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{0pt}
-            \renewcommand{\makelabel}[1]{\textgt{##1\ \ :\ }}}
+        }
         \newcommand{\name}[1]{%               % 이름
             \ifx\@ccvlang\@korean
                 \def\@arg{[이\hfill름]}
@@ -757,16 +760,16 @@
 
     \newenvironment{education}{%               % 학력
         \thispagestyle{empty}
-        \vspace*{10mm} \noindent
+        \vspace*{5mm} \noindent
 %        \ifx\@ccvlang\@korean
 %            \begin{center}
 %                \makebox[2cm][s]{\textbf{\large 학 력}}
 %            \end{center}
 %        \else \textbf{\large Educations} \fi
         \begin{center}\large\textbf{Education}\end{center}
-        \vspace{3mm}
+        % \vspace{3mm}
         \begin{list}{}{%
-            \setlength{\labelwidth}{95pt}
+            \setlength{\labelwidth}{110pt}
             \setlength{\leftmargin}{\labelwidth}
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{0pt}
@@ -775,16 +778,16 @@
 
     \newenvironment{experience}{%                  % 경력
         \thispagestyle{empty}              % ver0.2 : 쪽 번호없음
-        \vspace*{10mm} \noindent           % ver0.2 : 줄 간격 조정
+        \vspace*{5mm} \noindent           % ver0.2 : 줄 간격 조정
 %        \ifx\@ccvlang\@korean
 %            \begin{center}
 %                \makebox[2cm][s]{\textbf{\large 경 력}}
 %            \end{center}
 %        \else \textbf{\large Career} \fi
         \begin{center}\large\textbf{Experience}\end{center}
-        \vspace{3mm}
+        % \vspace{3mm}
         \begin{list}{}{%
-            \setlength{\labelwidth}{95pt}
+            \setlength{\labelwidth}{110pt}
             \setlength{\leftmargin}{\labelwidth}
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{\z@}
@@ -794,17 +797,18 @@
     \newcounter{itemnum1}
     \newenvironment{affiliation}{%                % 학회활동
         \thispagestyle{empty}                   % ver0.2 : 쪽 번호없음
-        \vspace*{10mm} \noindent        % ver0.2 : 줄 간격 조정
+        \vspace*{5mm} \noindent        % ver0.2 : 줄 간격 조정
 %        \ifx\@ccvlang\@korean
 %            \begin{center}
 %                \makebox[2cm][s]{\textbf{\large 학 회 활 동}}
 %            \end{center}
 %        \else \textbf{\large Academic Activities} \fi
         \begin{center}\large\textbf{Affiliation}\end{center}
-        \vspace{3mm}
+        % \vspace{3mm}
+        \newcounter{itemnum1+1}
         \begin{list}{}{%
             \usecounter{itemnum1+1}
-            \setlength{\labelwidth}{95pt}
+            \setlength{\labelwidth}{110pt}
             \setlength{\leftmargin}{\labelwidth}
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{\z@}
@@ -1077,7 +1081,7 @@
     \newcommand{\@day}{#3}%
     \@day\ifcase\@day \or
         st\or nd\or rd\or th\or th\or th\or th\or th\or th\or th\or
-        st\or nd\or rd\or th\or th\or th\or th\or th\or th\or th\or
+        th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or
         st\or nd\or rd\or th\or th\or th\or th\or th\or th\or th\or th\fi
     \space\ifcase\@month \or
         January\or February\or March\or April\or May\or June\or
