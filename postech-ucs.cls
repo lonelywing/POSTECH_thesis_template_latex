@@ -45,8 +45,8 @@
 \ProcessOptions
 
 %% 11pt,onecolumn,oneside 옵션으로 report 클래스 불러오기
-\LoadClass[11pt,onecolumn,oneside]{report} % ver0.3 : 본문 글자 크기 11pt
-
+\LoadClass[11pt,onecolumn,twoside,openright]{report} % ver0.3 : 본문 글자 크기 11pt
+\usepackage{emptypage}
 
 %%들여쓰기
 \usepackage{indentfirst}
@@ -492,7 +492,7 @@
     \end{minipage}
 \vfill
     \thispagestyle{empty} \noindent
-    \begin{minipage}[b][][b]{\textwidth}
+    \centerline{\begin{minipage}[b][][b]{0.9\textwidth}
         \begin{center}
     \Large by \\ \vspace{\baselineskip}
             \@authorEngGN \ \@authorEngFN \\  % 저자 영문이름
@@ -501,9 +501,11 @@
 \\ \vspace{\baselineskip}
             \Large
             \if@isDoctor
-                A dissertation submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\ in \@programDeptNameEng
+                A dissertation submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\\
+                in \@programDeptNameEng
             \else
-                A thesis submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\ in \@programDeptNameEng
+                A thesis submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\\
+                in \@programDeptNameEng
             \fi
 \\ \vspace{3\baselineskip}
             \Large
@@ -516,7 +518,7 @@
 %            \@advisorMajorEng \ \textcolor{white}{(Signature)} \\ % ver0.2 : 서명란 글씨 흰색 (인쇄용)
             Academic advisor
         \end{center}
-    \end{minipage}
+    \end{minipage}}
 
       % 학위논문 심사완료 검인서
     \newpage
@@ -531,22 +533,24 @@
     \begin{minipage}[b][][b]{\textwidth}
         \begin{center}
         \LARGE \@authorEng \\ \vspace{\baselineskip}
-            \Large The undersigned have examined this \ifthenelse{\boolean{@isDoctor}}{dissertation}{thesis} and hereby certify that it is worthy of acceptance for a \ifthenelse{\boolean{@isDoctor}}{doctoral}{master's} degree from POSTECH \vspace{2\baselineskip}
+            \Large The undersigned have examined this \ifthenelse{\boolean{@isDoctor}}{dissertation}{thesis} and\\
+            hereby certify that it is worthy of acceptance for a\\
+            \ifthenelse{\boolean{@isDoctor}}{doctoral}{master's} degree from POSTECH \vspace{3\baselineskip}
         \end{center}
 
         \begin{flushright}
         \Large
-        \@refereeYear. \@refereeMonth. \@refereeDay \\ \vspace{2\baselineskip}
+        \@refereeYear. \@refereeMonth. \@refereeDay \\ \vspace{\baselineskip}
     \begin{tabular}{r r r}   % 심사위원명단
-                \@ifundefined{@refereeChief}{}
+                \@ifundefined{@refereeChief}{\\~}
                     {\\[4pt] Committee Chair & \ \makebox[\width]{\@refereeChief}  & \ (Seal)}
-                \@ifundefined{@refereeSecond}{}
+                \@ifundefined{@refereeSecond}{\\~}
                     {\\[4pt] Member   & \ \makebox[\width]{\@refereeSecond} & \ (Seal)}
-                \@ifundefined{@refereeThird}{}
+                \@ifundefined{@refereeThird}{\\~}
                     {\\[4pt] Member   & \ \makebox[\width]{\@refereeThird}  & \ (Seal)}
-                \@ifundefined{@refereeFourth}{}
+                \@ifundefined{@refereeFourth}{\\~}
                     {\\[4pt] Member   & \ \makebox[\width]{\@refereeFourth} & \ (Seal)}
-                \@ifundefined{@refereeFifth}{}
+                \@ifundefined{@refereeFifth}{\\~}
                     {\\[4pt] Member   & \ \makebox[\width]{\@refereeFifth} & \ (Seal)}
             \end{tabular}
         \end{flushright}
@@ -562,7 +566,7 @@
 \renewenvironment{abstract}{%
     %\thispagestyle{plain}
     \thispagestyle{postech}
-    \pagenumbering{Roman}                        % 로마자 페이지 시작
+    \pagenumbering{roman}                        % 로마자 페이지 시작
     \newcommand{\@tempbreak}{}                   % \linebreak 명령 보관용
     \let\@tempbreak\linebreak
     \renewcommand{\linebreak}{\ }                % \linebreak -> 공백 대체
@@ -641,7 +645,7 @@
     \if@isKorean
     \else
         \chapter*{Summary}
-        \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary (in Korean)}}
+        \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary}}
         % \begin{center}
         %     \noindent \Large \@titleEng \\[6mm]
         % \end{center}% \setlength{\parindent}{0pt}
@@ -649,13 +653,13 @@
 }{  \let\linebreak\@tempbreak          % \linebreak 명령 되돌리기
 }
 
-\newcommand{\summarykorean}{%           % ver 0.1 요약문 생성 명령
+\newenvironment{summarykorean}{%           % ver 0.1 요약문 생성 명령
     \renewcommand{\linebreak}{\ }      % 차후 버젼에서 삭제 예정
     \setlength{\parindent}{10pt}
     \ifx\@textlang\@english
         \chapter*{요 약 문}
         \fontsize{11pt}{19pt} \selectfont
-        \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary (in Korean)}}
+        \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\rmfamily{Summary (Korean)}}
         % \begin{center}
         %     \noindent{\Large \@titleKor} \\[6mm]
         % \end{center}% \setlength{\parindent}{0\p@}
@@ -773,7 +777,7 @@
             \setlength{\leftmargin}{\labelwidth}
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{0pt}
-            \renewcommand{\makelabel}[1]{\textgt{##1\hfill\ }}}
+            \renewcommand{\makelabel}[1]{##1\hfill\ }}
     }{\end{list}}
 
     \newenvironment{experience}{%                  % 경력
@@ -791,7 +795,7 @@
             \setlength{\leftmargin}{\labelwidth}
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{\z@}
-            \renewcommand{\makelabel}[1]{\textgt{##1\hfill\ }}}
+            \renewcommand{\makelabel}[1]{##1\hfill\ }}
     }{\end{list}}
 
     \newcounter{itemnum1}
@@ -813,7 +817,7 @@
             \addtolength{\leftmargin}{\labelsep}
             \setlength{\parsep}{\z@}
 %            \renewcommand{\makelabel}{\textgt{\arabic{itemnum1}.\ }}}
-            \renewcommand{\makelabel}[1]{\textgt{##1\hfill\ }}}
+            \renewcommand{\makelabel}[1]{##1\hfill\ }}
     }{\end{list}}
 
 %    \newcounter{itemnum2}
@@ -863,9 +867,9 @@
 %% \chapter 재정의 - report 클래스로부터 복사하여 일부 수정
 %%
 
-\renewcommand{\thechapter}{\Roman{chapter}} %Enumerate chapter as Roman number
+%\renewcommand{\thechapter}{\Roman{chapter}} %Enumerate chapter as Roman number
 %\renewcommand{\thechapter}{\Roman{part}} %Enumerate chapter as Roman number
-%\renewcommand{\thechapter}{\arabic{chapter}} %Enumerate chapter as Roman number
+\renewcommand{\thechapter}{\arabic{chapter}} %Enumerate chapter as number
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}} %Enumerate section as arabic number
 \renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}} % ver0.2 : figure 번호를 아라비아 숫자로 표기
 \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}   % ver0.2 : table 번호를 아라비아 숫자로 표기
@@ -902,16 +906,17 @@
     \fi
 }
 \def\@makechapterhead#1{% <-- 전체 변경
-    \vspace*{10\p@}
-    {\centering \parindent\z@ \LARGE\bfseries
-    %{\centering \parindent\z@ \LARGE\bfseries
+    \vspace*{20\p@}
+    {\parindent\z@ \LARGE\bfseries
+    %{\parindent\z@ \LARGE\bfseries
 %    \ifthenelse{\equal{\@textlang}{korean}}
 %        {제\hspace{1.4ex}\thechapter\hspace{1.4ex}장\hspace{2ex}}
 %        {Chapter\hspace{1.4ex}\thechapter.\hspace{1ex}}
 %        {\thechapter.\hspace{1ex}}
-    \thechapter.\hspace{1ex}
+    % \thechapter.\hspace{1ex}
+    Chapter \arabic{chapter}\hspace{1ex}\newline\newline
     #1\par}
-    \vspace*{20\p@}
+    \vspace*{38\p@}
 }
 \def\@schapter#1{%
     \if@twocolumn
@@ -932,7 +937,7 @@
 \renewcommand\tableofcontents{%
     %\thispagestyle{plain}
     \thispagestyle{postech}
-    \pagenumbering{Roman}                        % 로마자 페이지 시작
+    \pagenumbering{roman}                        % 로마자 페이지 시작
     \if@twocolumn
         \@restonecoltrue\onecolumn
     \else
@@ -959,7 +964,7 @@
 \renewcommand\listoftables{%
     %\thispagestyle{plain}
     \thispagestyle{postech}
-    \pagenumbering{Roman}                        % 로마자 페이지 시작
+    \pagenumbering{roman}                        % 로마자 페이지 시작
     \if@twocolumn
         \@restonecoltrue\onecolumn
     \else
@@ -983,7 +988,7 @@
 \renewcommand\listoffigures{%
     %\thispagestyle{plain}
     \thispagestyle{postech}
-    \pagenumbering{Roman}                        % 로마자 페이지 시작
+    \pagenumbering{roman}                        % 로마자 페이지 시작
     \if@twocolumn
         \@restonecoltrue\onecolumn
     \else
