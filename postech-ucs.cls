@@ -156,6 +156,24 @@
      \let\@evenhead\@empty\let\@evenfoot\@oddfoot
 }
 
+\let\Chaptermark\chaptermark
+\def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
+\def\Chapternumber{}
+\def\ps@chapterstyle{\let\@mkboth\@gobbletwo
+     \def\@oddhead{\reset@font\thechapter. \Chaptername\hfill\thepage}%
+     \let\@oddfoot\@empty
+     \def\@evenhead{\reset@font\thepage\hfill\thechapter. \Chaptername}%
+     \let\@evenfoot\@empty
+}
+
+\def\ps@chapterstarstyle{\let\@mkboth\@gobbletwo
+     \def\@oddhead{\reset@font\Chaptername\hfill\thepage}%
+     \let\@oddfoot\@empty
+     \def\@evenhead{\reset@font\thepage\hfill\Chaptername}%
+     \let\@evenfoot\@empty
+}
+
+
 \pagestyle{postech}
 
 %%
@@ -638,7 +656,6 @@
 %% 한글요약문 생성 - 영문논문의 경우만 해당
 %%
 \newenvironment{summary}{%              % 요약문 생성 환경
-    \thispagestyle{postech}               % ver0.2 : 국문 요약문 쪽번호 유지
     \newcommand{\@tempbreak}{}
     \let\@tempbreak\linebreak
     \renewcommand{\linebreak}{\ }      % \linebreak 명령 바꿔치기
@@ -651,6 +668,7 @@
         % \end{center}% \setlength{\parindent}{0pt}
     \fi
 }{  \let\linebreak\@tempbreak          % \linebreak 명령 되돌리기
+    \clearpage
 }
 
 \newenvironment{summarykorean}{%           % ver 0.1 요약문 생성 명령
@@ -666,6 +684,7 @@
     \fi
 }{
     \let\linebreak\@tempbreak
+    \clearpage
 }
 
 %%
@@ -877,13 +896,14 @@
 
 \renewcommand\chapter{%
     \if@openright\cleardoublepage\else\clearpage\fi
-%   \thispagestyle{plain}%
+    \thispagestyle{postech}%
     \global\@topnum\z@
     \@afterindentfalse
 %   \if@isKorean \parindent\z@ \else \fi % <-- 추가할지 여부 고민중
     \secdef\@chapter\@schapter}
 
 \def\@chapter[#1]#2{%
+    \pagestyle{chapterstyle}%
     \ifnum \c@secnumdepth >\m@ne
         \refstepcounter{chapter}%
         \typeout{\@chapapp\space\thechapter.}%
@@ -919,6 +939,8 @@
     \vspace*{38\p@}
 }
 \def\@schapter#1{%
+    \pagestyle{chapterstarstyle}%
+    \chaptermark{#1}%
     \if@twocolumn
         \@topnewpage[\@makeschapterhead{#1}]%
     \else
@@ -1065,7 +1087,7 @@
     \sfcode`\.\@m%
 }{  \label{paperlastpagelabel}     % <-- 추가 부분: 마지막 페이지 위치 지정
     \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
-    \endlist
+    \endlist\clearpage
 }
 
 %%
