@@ -860,6 +860,25 @@
 %            \renewcommand{\makelabel}{\textgt{\arabic{itemnum2}.\ }}}
 %    }{\end{list}}
 
+% edited by Jaehun Shin 2021-04-07 :: allow publication
+    \newenvironment{publication}{%             % 연구업적
+        \thispagestyle{empty}
+        \vspace*{10mm} \noindent
+        \begin{center}\large\textbf{Publication}\end{center}
+        \vspace{3mm}
+    }{}
+
+    \newenvironment{subpublication}[1]{%             % 세부연구업적
+        \thispagestyle{empty}
+        \noindent\textbf{#1}
+
+        \begin{list}{}{%
+            \setlength{\leftmargin}{20pt}
+            \renewcommand{\makelabel}{}
+        }
+    }{\end{list}}
+
+
 %%
 %% 헤딩 재설정
 %%
