@@ -519,11 +519,15 @@
 \\ \vspace{\baselineskip}
             \Large
             \if@isDoctor
-                A dissertation submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\\
-                in \@programDeptNameEng
+                A dissertation submitted to the faculty of the\\
+                \@postech\ in\\
+                partial fulfillment of the requirements for the degree of\\
+                \@degreeName\ in \@programDeptNameEng
             \else
-                A thesis submitted to the faculty of the \@postech\ in partial fulfillment of the requirements for the degree of \@degreeName\\
-                in \@programDeptNameEng
+                A thesis submitted to the faculty of the\\
+                \@postech\ in\\
+                partial fulfillment of the requirements for the degree of\\
+                \@degreeName\ in \@programDeptNameEng
             \fi
 \\ \vspace{3\baselineskip}
             \Large
