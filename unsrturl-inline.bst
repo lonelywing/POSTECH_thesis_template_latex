@@ -75,9 +75,9 @@ FUNCTION {init.urlbst.variables}
   #1 'inlinelinks :=        % 0=URLs explicit; 1=URLs attached to titles
 
   % String constants, which you _might_ want to tweak.
-  "URL: " 'urlintro := % prefix before URL; typically "Available from:" or "URL":
+  "" 'urlintro := % prefix before URL; typically "Available from:" or "URL":
   "online" 'onlinestring := % indication that resource is online; typically "online"
-  "cited " 'citedstring := % indicator of citation date; typically "cited "
+  "Accessed " 'citedstring := % indicator of citation date; typically "cited "
   "[link]" 'linktextstring := % dummy link text; typically "[link]"
   "http://arxiv.org/abs/" 'eprinturl := % prefix to make URL from eprint ref
   "arXiv:" 'eprintprefix := % text prefix printed before eprint ref; typically "arXiv:"
@@ -232,7 +232,7 @@ FUNCTION {inbrackets}
 FUNCTION {format.lastchecked}
 { lastchecked empty$
     { "" }
-    { inbrackets citedstring lastchecked * }
+    { "(" citedstring * lastchecked * ")" * }
   if$
 }
 % ...urlbst to here
@@ -739,7 +739,7 @@ FUNCTION {make.href}
 % If inlinelinks is true, then format.url should be a no-op, since it's
 % (a) redundant, and (b) could end up as a link-within-a-link.
 FUNCTION {format.url}
-{ inlinelinks #1 = url empty$ or
+{ url empty$
    { "" }
    { hrefform #1 =
        { % special case -- add HyperTeX specials
@@ -749,6 +749,7 @@ FUNCTION {format.url}
    }
   if$
 }
+
 FUNCTION {format.eprint}
 { eprint empty$
     { "" }
@@ -779,8 +780,7 @@ FUNCTION {output.url}
 { url empty$
     'skip$ 
     { new.block 
-      format.url output
-      format.lastchecked output 
+      format.url " " * format.lastchecked * output
     }
   if$
 }
@@ -817,6 +817,34 @@ FUNCTION {output.web.refs}
   if$
 }
 
+FUNCTION {output.web.refs.explicit}
+{
+  new.block
+  % If the generated DOI will be the same as the URL,
+  % then don't print the URL (thanks to Joseph Wright for this code,
+  % at http://tex.stackexchange.com/questions/5660)
+  adddoiresolver
+      doiurl doi empty$ { "X" } { doi } if$ * % DOI URL to be generated
+      url empty$ { "Y" } { url } if$          % the URL, or "Y" if empty
+      =                                       % are the strings equal?
+      and
+    'skip$
+    { output.url }
+  if$
+  addeprints eprint empty$ not and
+    { format.eprint output.nonnull }
+    'skip$
+  if$
+  adddoiresolver doi empty$ not and
+    { format.doi output.nonnull }
+    'skip$
+  if$
+  addpubmedresolver pubmed empty$ not and
+    { format.pubmed output.nonnull }
+    'skip$
+  if$
+}
+
 % Wrapper for output.bibitem.original.
 % If the URL field is not empty, set makeinlinelink to be true,
 % so that an inline link will be started at the next opportunity
@@ -832,6 +860,21 @@ FUNCTION {output.bibitem}
 % Wrapper for fin.entry.original
 FUNCTION {fin.entry}
 { output.web.refs  % urlbst
+  makeinlinelink       % ooops, it appears we didn't have a title for inlinelink
+    { possibly.setup.inlinelink % add some artificial link text here, as a fallback
+      linktextstring output.nonnull }
+    'skip$
+  if$
+  bracket.state close.brackets = % urlbst
+    { "]" * }
+    'skip$
+  if$
+  fin.entry.original
+}
+
+% Wrapper for fin.entry.original
+FUNCTION {fin.entry.explicit}
+{ output.web.refs.explicit  % urlbst
   makeinlinelink       % ooops, it appears we didn't have a title for inlinelink
     { possibly.setup.inlinelink % add some artificial link text here, as a fallback
       linktextstring output.nonnull }
@@ -870,7 +913,6 @@ FUNCTION {webpage}
   new.block
   title empty$ 'skip$ 'possibly.setup.inlinelink if$
   format.title "title" output.check
-  inbrackets onlinestring output
   new.block
   year empty$
     'skip$
@@ -882,7 +924,7 @@ FUNCTION {webpage}
   % they should go in front of the rather miscellaneous information in 'note'.
   new.block
   note output
-  fin.entry
+  fin.entry.explicit
 }
 % ...urlbst to here
 
