@@ -59,6 +59,7 @@
 \usepackage{physics}
 \usepackage{anyfontsize}
 \usepackage{lipsum}
+\usepackage{jiwonlipsum}
 % \usepackage{bbm}
 % \renewcommand{\thealgorithm}{}
 \newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
@@ -86,7 +87,7 @@
 % If you are a foreigner (this means you have no korean name),
 % You must fill the korean name as blank, instead of deleting it or commenting it out.
 % \author[korean]{}{}
-% \author[english]{Donald}{Trump}
+% \author[english]{John}{Doe}
 %
 %
 \author[korean]{홍}{길 동}
@@ -191,8 +192,8 @@
 \chapter{Introduction}
 \lipsum
 
-\chapter{Citation}
-It is a citation example~\cite{Moin1998}.
+\chapter{Citation examples}
+Some examples of journal citations~\cite{Moin1998,PhysRevD.93.124052,pimentel-etal-2020-phonotactic,jaker_kiparsky_2020,726791,Erdos1960}.  Also some conference proceedings~\cite{Erdos60onthe,NIPS1989_53c3bce6,10.5555/2969239.2969312}, an arxiv posting~\cite{li_comparing_2009}, a thesis~\cite{Gell-Mann:1951xrt}, a book chapter~\cite{LeCun2012}, and other resources~\cite{gage1994bpe}, with diacritics\footnote{\url{https://en.wikibooks.org/wiki/LaTeX/Special_Characters\#Escaped_codes}} aplenty (see especially~\cite{jaker_kiparsky_2020,726791,Erdos1960}, among others).
 
 %%
 %% 한글요약문 시작 (Korean summary)
@@ -200,7 +201,7 @@ It is a citation example~\cite{Moin1998}.
 %% Note. 영문논문일 경우에만 필요하니 한글논문의 경우에는 작성하지 마십시오.
 %%
 \begin{summarykorean}
-
+\jiwon
 \end{summarykorean}
 
 %%
@@ -219,7 +220,8 @@ It is a citation example~\cite{Moin1998}.
 % @options [default: 클래스 옵션 korean|english ]
 % - korean : 한글타이틀 | english : 영문타이틀
 
-\acknowledgement[korean]
+\acknowledgement[english]
+\lipsum
 
 
     %%때로는 엄하고 때로는 부드러운 모습으로 지도 해주신 한준희 교수님, 감사드립니다.
@@ -230,7 +232,7 @@ It is a citation example~\cite{Moin1998}.
 % @command curriculumvitae 이력서
 % @options [default: 클래스 옵션 korean|english ]
 % - korean : 한글이력서 | english : 영문이력서
-\curriculumvitae[korean]
+\curriculumvitae[english]
 
     % @environment personaldata 개인정보
     % @command     name         이름
