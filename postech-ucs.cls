@@ -941,9 +941,9 @@
 %% \chapter 재정의 - report 클래스로부터 복사하여 일부 수정
 %%
 
-%\renewcommand{\thechapter}{\Roman{chapter}} %Enumerate chapter as Roman number
+\renewcommand{\thechapter}{\Roman{chapter}} %Enumerate chapter as Roman number
 %\renewcommand{\thechapter}{\Roman{part}} %Enumerate chapter as Roman number
-\renewcommand{\thechapter}{\arabic{chapter}} %Enumerate chapter as number
+%\renewcommand{\thechapter}{\arabic{chapter}} %Enumerate chapter as Roman number
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}} %Enumerate section as arabic number
 \renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}} % ver0.2 : figure 번호를 아라비아 숫자로 표기
 \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}   % ver0.2 : table 번호를 아라비아 숫자로 표기
@@ -981,17 +981,16 @@
     \fi
 }
 \def\@makechapterhead#1{% <-- 전체 변경
-    \vspace*{20\p@}
-    {\parindent\z@ \LARGE\bfseries
-    %{\parindent\z@ \LARGE\bfseries
+    \vspace*{10\p@}
+    {\centering \parindent\z@ \LARGE\bfseries
+    %{\centering \parindent\z@ \LARGE\bfseries
 %    \ifthenelse{\equal{\@textlang}{korean}}
 %        {제\hspace{1.4ex}\thechapter\hspace{1.4ex}장\hspace{2ex}}
 %        {Chapter\hspace{1.4ex}\thechapter.\hspace{1ex}}
 %        {\thechapter.\hspace{1ex}}
-    % \thechapter.\hspace{1ex}
-    Chapter \arabic{chapter}\hspace{1ex}\newline\newline
+    \thechapter.\hspace{1ex}
     #1\par}
-    \vspace*{38\p@}
+    \vspace*{20\p@}
 }
 \def\@schapter#1{%
     \pagestyle{chapterstarstyle}%
