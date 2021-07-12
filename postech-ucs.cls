@@ -82,7 +82,10 @@
 %  \input glyphtounicode\pdfgentounicode=1
 %\fi
 
-\RequirePackage[\@drivername]{graphicx,xcolor}
+%% to include scanned approval pages
+\usepackage[\@drivername]{pdfpages}
+
+% \PassOptionsToPackage[\@drivername]{graphicx,xcolor}
 
 \if@PDFdoc
   \RequirePackage[unicode,%
@@ -225,6 +228,11 @@
             \newcommand{\@advisorSigned}{\@advisorCooprEng}}{} }{}%
 }
 \@onlypreamble{\advisor}
+
+\newcommand{\approval}[2]{
+    \newcommand{\@advisorApproval}{#1}
+    \newcommand{\@committeeApproval}{#2}
+}
 
 % @command department
 %
@@ -472,7 +480,7 @@
         \end{center}
     \end{minipage}
 %    \afterpage{\null\thispagestyle{empty}\newpage}           % ver0.2 : 첫 장 백색별지 추가 (지침사항은 아님)
-    \newpage
+    \if@twoside\cleardoublepage\else\clearpage\fi
 }
 
 %%
@@ -491,14 +499,15 @@
             \@titleEng
         \end{center}
     \end{minipage}
-    \newpage
+    \if@twoside\cleardoublepage\else\clearpage\fi
 }
 
 %%
 %% 학위논문 제출승인서 및 심사완료 검인서 생성
 %%
 \newcommand{\makeapproval}{%
-    % 학위논문 제출승인서
+  % 학위논문 제출승인서
+  \@ifundefined{@advisorApproval}{
     \renewcommand{\baselinestretch}{1.3}
 %    \hyphenation{institute department division program} % word division 방지
     \thispagestyle{empty} \noindent
@@ -541,9 +550,14 @@
             Academic advisor
         \end{center}
     \end{minipage}}
+  }{
+    \includepdf[pages=1]{\@advisorApproval}
+  }
 
-      % 학위논문 심사완료 검인서
-    \newpage
+  \if@twoside\cleardoublepage\else\clearpage\fi
+
+  % 학위논문 심사완료 검인서
+  \@ifundefined{@committeeApproval}{
     \thispagestyle{empty} \noindent
     \begin{minipage}[t][][t]{\textwidth}
         \begin{center}
@@ -577,7 +591,12 @@
             \end{tabular}
         \end{flushright}
     \end{minipage}
-    \hfill \newpage
+    \hfill
+  }{
+    \includepdf[pages=1]{\@committeeApproval}
+  }
+
+  \if@twoside\cleardoublepage\else\clearpage\fi
 }
 
 %%
@@ -626,7 +645,7 @@
 }
 {
 %     \label{pg:abstractLastPage}
-      \newpage
+      \if@twoside\cleardoublepage\else\clearpage\fi
       \setcounter{pagemarker}{\value{page}}
 
      %\pagenumbering{Roman}
@@ -999,7 +1018,8 @@
 %    \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{content}{\contentsname} % 목차(TOC)에 추가
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
-    \newpage \setcounter{pagemarker}{\value{page}}% pagemarker에 다시 저장
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \setcounter{pagemarker}{\value{page}}% pagemarker에 다시 저장
     \pagenumbering{arabic}                        % arabic 페이지번호로 재시작
 }
 
@@ -1023,8 +1043,9 @@
 %    \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\listtablename}% 목차(TOC)에 추가
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
-    \newpage \setcounter{pagemarker}{\value{page}}% pagemarker에 다시 저장
-%    \pagenumbering{arabic}                        % arabic 페이지번호로 재시작
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \setcounter{pagemarker}{\value{page}}% pagemarker에 다시 저장
+    \pagenumbering{arabic}                        % arabic 페이지번호로 재시작
 }
 
 %%
@@ -1047,7 +1068,8 @@
 %    \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{\listfigurename}% 목차(TOC)에 추가
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
-    \newpage \setcounter{pagemarker}{\value{page}}% pagemarker에 다시 저장
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \setcounter{pagemarker}{\value{page}}% pagemarker에 다시 저장
     \pagenumbering{arabic}                        % arabic 페이지번호로 재시작
 }
 
