@@ -159,24 +159,6 @@
      \let\@evenhead\@empty\let\@evenfoot\@oddfoot
 }
 
-\let\Chaptermark\chaptermark
-\def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
-\def\Chapternumber{}
-\def\ps@chapterstyle{\let\@mkboth\@gobbletwo
-     \def\@oddhead{\reset@font\thechapter. \Chaptername\hfill\thepage}%
-     \let\@oddfoot\@empty
-     \def\@evenhead{\reset@font\thepage\hfill\thechapter. \Chaptername}%
-     \let\@evenfoot\@empty
-}
-
-\def\ps@chapterstarstyle{\let\@mkboth\@gobbletwo
-     \def\@oddhead{\reset@font\Chaptername\hfill\thepage}%
-     \let\@oddfoot\@empty
-     \def\@evenhead{\reset@font\thepage\hfill\Chaptername}%
-     \let\@evenfoot\@empty
-}
-
-
 \pagestyle{postech}
 
 %%
@@ -958,7 +940,6 @@
     \secdef\@chapter\@schapter}
 
 \def\@chapter[#1]#2{%
-    \pagestyle{chapterstyle}%
     \ifnum \c@secnumdepth >\m@ne
         \refstepcounter{chapter}%
         \typeout{\@chapapp\space\thechapter.}%
@@ -993,8 +974,6 @@
     \vspace*{20\p@}
 }
 \def\@schapter#1{%
-    \pagestyle{chapterstarstyle}%
-    \chaptermark{#1}%
     \if@twocolumn
         \@topnewpage[\@makeschapterhead{#1}]%
     \else
