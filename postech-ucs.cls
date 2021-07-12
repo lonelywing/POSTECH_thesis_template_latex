@@ -654,6 +654,19 @@
 %    \afterpage{\blankpage}                      % % ver0.2 : 초록 이후 백색별지
 }
 
+\newcommand{\dedication}[1]{
+    ~\vspace{4em}
+    \thispagestyle{empty}
+    \pagenumbering{roman}
+    \begin{center}
+    \emph{#1}
+    \end{center}
+    \setcounter{page}{\value{pagemarker}}
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \setcounter{pagemarker}{\value{page}}
+    \pagenumbering{arabic}
+}
+
 %%
 %% 목차 일괄 생성
 %%
