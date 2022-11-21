@@ -19,6 +19,7 @@ Windows 7, 8, 10, ubuntu 14.10 이상에서 테스트 완료되었습니다.
 학위논문의 크기가 충분히 작으시다면 (<50MB), overleaf를 쓰시는것도 추천드립니다 (https://www.overleaf.com/).
 
 하지만 학위논문의 크기가 큰 경우, overleaf에서의 컴파일이 원활하지 못할 가능성이 매우 높습니다. 따라서 local PC에서 local editor로 작업하시는 편을 추천드립니다.
+
 Overleaf를 사용하시는 경우, TexLive version을 2021로 낮추어 사용하셔야 합니다. Overleaf Menu->TeX Live version에서 변경 가능합니다 (2022.11.22).
 
 
